@@ -19,7 +19,7 @@ const ResultGrid = () => {
         if (!query) return
 
         if (activeTab === "Photos") {
-          let res = await fetchPhotos(query);
+          let res = await fetchPhotos(query,1,30);
           data = res.results.map((items) => (
             {
               id: items.id,
@@ -30,7 +30,7 @@ const ResultGrid = () => {
             }))
         }
         if (activeTab === "Videos") {
-          let res = await fetchVideos(query);
+          let res = await fetchVideos(query,80);
           data = res.videos.map((items) => (
             {
               id: items.id,
@@ -58,7 +58,7 @@ const ResultGrid = () => {
   if(loading) return <h1>Loading...</h1>
 
   return (
-    <div className="flex flex-wrap overflow-auto gap-10 justify-between mx-10">
+    <div className="flex flex-wrap gap-10 justify-between mx-10">
       {result.map((item,idx)=>{
         return <div key={idx}>
           <ResultCard item={item}/>
