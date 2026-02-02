@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVideos, fetchPhotos } from '../api/mediaApi';
-import { setQuery, setLoading, setResult, setError } from '../redux/features/searchSlice'
+import { setLoading, setResult, setError } from '../redux/features/searchSlice'
 import { useEffect } from "react";
+import ResultCard from './ResultCard'
+
 
 const ResultGrid = () => {
   const { activeTab, query, result, loading, error } = useSelector((store) => store.search)
@@ -17,7 +19,7 @@ const ResultGrid = () => {
         if (!query) return
 
         if (activeTab === "Photos") {
-          let res = await fetchPhotos(query,5,20);
+          let res = await fetchPhotos(query);
           data = res.results.map((items) => (
             {
               id: items.id,
@@ -28,17 +30,19 @@ const ResultGrid = () => {
             }))
         }
         if (activeTab === "Videos") {
-          let res = await fetchVideos(query, 10);
+          let res = await fetchVideos(query);
           data = res.videos.map((items) => (
             {
               id: items.id,
               title: items.user.name,
               type: 'video',
               thumbnail: items.image,
-              src: items.url
+              src: items.video_files[0].link
             }
           ))
         }
+        console.log(data);
+        
         dispatch(setResult(data))
 
       } catch (error) {
@@ -54,9 +58,11 @@ const ResultGrid = () => {
   if(loading) return <h1>Loading...</h1>
 
   return (
-    <div>
+    <div className="flex flex-wrap overflow-auto gap-10 justify-between mx-10">
       {result.map((item,idx)=>{
-        return <div key={idx}>{item.title}</div>
+        return <div key={idx}>
+          <ResultCard item={item}/>
+        </div>
       })}
     </div>
   )
