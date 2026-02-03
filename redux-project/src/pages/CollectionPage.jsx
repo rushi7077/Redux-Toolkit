@@ -22,7 +22,7 @@ function CollectionPage() {
                 {collection.map((item, idx) => {
                     return <div key={idx}>
 
-                       
+                        <CollectionCard item={item} />
                     </div>
                 })}
             </div>
