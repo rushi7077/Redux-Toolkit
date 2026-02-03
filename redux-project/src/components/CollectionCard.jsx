@@ -1,11 +1,12 @@
-import { useDispatch } from 'react-redux'
-import { addCollection } from '../redux/features/collectionSlice';
+import React from 'react'
+import { useDispatch } from 'react-redux';
+import { removeCollection } from '../redux/features/collectionSlice';
 
-function ResultCard({ item }) {
-  const dispatch = useDispatch();
+function CollectionCard({item}) {
+const dispatch = useDispatch();
 
   const clickHandler = (item) => {
-    dispatch(addCollection(item))
+    dispatch(removeCollection(item))
   }
 
   return (
@@ -20,10 +21,10 @@ function ResultCard({ item }) {
       </a>
       <button onClick={() => {
         clickHandler(item)
-      }} className='py-1 active:scale-95 cursor-pointer px-4 rounded font-bold ml-5 absolute bottom-0 bg-blue-500'>Save</button>
+      }} className='py-1 active:scale-95 cursor-pointer px-4 rounded font-bold ml-5 absolute bottom-0 bg-blue-500'>Remove</button>
 
     </div>
   )
 }
 
-export default ResultCard
+export default CollectionCard

@@ -10,7 +10,7 @@ function HomePage() {
     return (
         <div>
 
-            <Navbar/>            
+            <Navbar/>
             < SearchBar />
             {query != '' ? <div>
                 <Tab />

@@ -20,7 +20,7 @@ function SearchBar() {
     <div>
         <form onSubmit={(e)=>{
             submitHandler(e);
-        }} className='p-10 bg-green-700 flex gap-10'>
+        }} className='p-10 bg-green-700 flex gap-10 pt-30'>
 
             <input required onChange={(e)=>{
             setText(e.target.value)
