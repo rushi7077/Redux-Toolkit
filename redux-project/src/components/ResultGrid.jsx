@@ -19,30 +19,30 @@ const ResultGrid = () => {
         if (!query) return
 
         if (activeTab === "Photos") {
-          let res = await fetchPhotos(query,1,30);
+          let res = await fetchPhotos(query, 1, 30);
           data = res.results.map((items) => (
             {
               id: items.id,
               title: items.alt_description,
               type: 'photo',
               thumbnail: items.urls.small,
-              src: items.urls.full
+              src: items.urls.full,
+              url: items.links.html
             }))
         }
         if (activeTab === "Videos") {
-          let res = await fetchVideos(query,80);
+          let res = await fetchVideos(query, 80);
           data = res.videos.map((items) => (
             {
               id: items.id,
               title: items.user.name,
               type: 'video',
               thumbnail: items.image,
-              src: items.video_files[0].link
+              src: items.video_files[0].link,
+              url: items.url
             }
           ))
         }
-        console.log(data);
-        
         dispatch(setResult(data))
 
       } catch (error) {
@@ -52,16 +52,16 @@ const ResultGrid = () => {
 
     }
     getData();
-  }, [query, activeTab,dispatch]);
+  }, [query, activeTab, dispatch]);
 
-  if(error) return <h1>Error</h1>
-  if(loading) return <h1>Loading...</h1>
+  if (error) return <h1>Error</h1>
+  if (loading) return <h1>Loading...</h1>
 
   return (
     <div className="flex flex-wrap gap-10 justify-between mx-10">
-      {result.map((item,idx)=>{
+      {result.map((item, idx) => {
         return <div key={idx}>
-          <ResultCard item={item}/>
+          <ResultCard item={item} />
         </div>
       })}
     </div>
