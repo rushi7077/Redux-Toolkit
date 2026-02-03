@@ -26,9 +26,9 @@ function SearchBar() {
             setText(e.target.value)
             }}
             value={text}
-            className='w-full px-5 py-2 outline-none rounded border-2' type="text" placeholder='Enter Anything'/>
+            className='w-full px-5 py-2 outline-none rounded border-2 text-xl font-bold' type="text" placeholder='Enter Anything'/>
 
-            <button className='px-5 py-2 cursor-pointer active:scale-95  outline-none rounded border-2 '>Search</button>
+            <button className='px-5 py-2 cursor-pointer active:scale-95  outline-none rounded border-2 text-xl font-bold '>Search</button>
         </form>
     </div>
   )
